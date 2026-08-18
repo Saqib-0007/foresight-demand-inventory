@@ -441,3 +441,126 @@ The final system provides both:
 
 - A **FastAPI backend** for programmatic access
 - A **Streamlit dashboard** for interactive business analysis
+
+## 21. Deployment
+
+FORESIGHT is deployed using separate frontend and backend services.
+
+### Streamlit Dashboard
+
+The Streamlit dashboard is deployed on Streamlit Community Cloud.
+
+**Live Dashboard:**
+
+https://foresight-demand-inventory-6qvrbt6bvjhut6rskpyrwq.streamlit.app/
+
+The dashboard provides:
+
+- Forecast performance
+- Inventory risk overview
+- SKU-level risk analysis
+- Business-impact metrics
+- Recommended inventory actions
+
+### FastAPI Backend
+
+The FastAPI backend is deployed on Render.
+
+**Live API:**
+
+https://foresight-demand-inventory.onrender.com
+
+**API Documentation:**
+
+https://foresight-demand-inventory.onrender.com/docs
+
+The FastAPI backend provides the forecasting and inventory-risk data consumed by the Streamlit dashboard.
+
+The Streamlit frontend communicates with the deployed FastAPI backend through HTTPS.
+
+## 22. System Architecture
+
+### Application Workflow
+
+```text
+Raw Data
+   ↓
+Data Quality & EDA
+   ↓
+Baseline Forecast
+   ↓
+LightGBM Forecast
+   ↓
+Inventory Risk Scoring
+   ↓
+FastAPI Backend
+   ↓
+Streamlit Dashboard
+   ↓
+Business Decisions
+
+User
+  ↓
+Streamlit Community Cloud
+  ↓
+HTTPS
+  ↓
+Render FastAPI Backend
+  ↓
+Forecast & Inventory Risk Data
+  ↓
+Business Insights
+
+```
+
+
+## 23. Live API
+
+### FastAPI Backend
+
+**Base URL:**
+
+https://foresight-demand-inventory.onrender.com
+
+### API Documentation
+
+https://foresight-demand-inventory.onrender.com/docs
+
+The `/docs` endpoint provides interactive Swagger documentation for the deployed FastAPI service.
+
+### Health Check
+
+```text
+GET /health
+
+
+### Section 24 — Final Project Results
+
+```markdown
+## 24. Final Project Results
+
+### Forecasting Performance
+
+| Model | WAPE |
+|---|---:|
+| Seasonal-Naive Baseline | 30.34% |
+| LightGBM | 13.44% |
+
+**Improvement: 16.90 percentage points**
+
+### Inventory Risk
+
+| Risk Category | SKU Count |
+|---|---:|
+| Healthy | 105 |
+| Stockout Risk | 95 |
+| Overstock Risk | 0 |
+
+### Business Impact
+
+- **Total SKUs analyzed:** 200
+- **Potential stockout sales at risk:** ₹7.49 crore
+- **Overstock capital locked:** ₹0
+
+The stockout sales figure represents potential sales exposure based on forecast demand and available inventory during the estimated lead-time period. It should not be interpreted as guaranteed lost revenue.
+
