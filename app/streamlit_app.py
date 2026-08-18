@@ -250,6 +250,26 @@ else:
 
 st.divider()
 
+st.subheader("Business Impact")
+
+impact_col1, impact_col2 = st.columns(2)
+
+with impact_col1:
+    stockout_impact = risk["stockout_sales_at_risk"].sum()
+
+    st.metric(
+        "Potential Stockout Sales at Risk",
+        f"₹{stockout_impact:,.0f}"
+    )
+
+with impact_col2:
+    overstock_impact = risk["overstock_capital_locked"].sum()
+
+    st.metric(
+        "Overstock Capital Locked",
+        f"₹{overstock_impact:,.0f}"
+    )
+
 st.header("Inventory Risk Overview")
 
 col1, col2 = st.columns(2)
@@ -350,6 +370,8 @@ else:
 display_columns = [
     "sku_id",
     "forecast_12w",
+    "stockout_sales_at_risk",
+    "overstock_capital_locked",
     "on_hand_units",
     "on_order_units",
     "lead_time_days",
